@@ -94,11 +94,19 @@ function createCalculRow(container, focusLeft = false) {
 // LIGNE DE TEXTE (Phrase / Conclusion)
 // ======================================================
 
+// ======================================================
+// LIGNE DE TEXTE (Phrase / Conclusion) - FIX CURSEUR
+// ======================================================
+
 function createTextRow(container, focus = false) {
-  const textRow = document.createElement("div");
-  textRow.className = "text-row";
-  textRow.contentEditable = "true";
-  textRow.spellcheck = false;
+  const row = document.createElement("div");
+  row.className = "text-row";
+
+  // Zone d'écriture séparée
+  const input = document.createElement("div");
+  input.className = "text-input";
+  input.contentEditable = "true";
+  input.spellcheck = false;
 
   // Bouton de suppression
   const deleteBtn = document.createElement("button");
@@ -106,14 +114,14 @@ function createTextRow(container, focus = false) {
   deleteBtn.innerHTML = "✕";
   deleteBtn.title = "Supprimer cette ligne";
   deleteBtn.tabIndex = -1;
-  deleteBtn.addEventListener("click", () => textRow.remove());
+  deleteBtn.addEventListener("click", () => row.remove());
 
-  textRow.appendChild(deleteBtn);
-  container.appendChild(textRow);
+  row.append(input, deleteBtn);
+  container.appendChild(row);
 
   if (focus) {
-    textRow.focus();
-    activeEditor = textRow;
+    input.focus();
+    activeEditor = input;
   }
 }
 
@@ -132,7 +140,7 @@ document.getElementById("exercises-container").addEventListener("focusin", (e) =
   const t = e.target;
   if (
     t.classList.contains("side") ||
-    t.classList.contains("text-row") ||
+    t.classList.contains("text-input") || // <--- ICI
     t.classList.contains("exercise-intro") ||
     t.classList.contains("math-zone") ||
     t.classList.contains("exponent-editable") ||
@@ -154,7 +162,7 @@ document.getElementById("exercises-container").addEventListener("keydown", (e) =
     if (target.classList.contains("side")) {
       e.preventDefault();
       if (container) createCalculRow(container, true);
-    } else if (target.classList.contains("text-row")) {
+    } else if (target.classList.contains("text-input")) { // <--- ICI
       e.preventDefault();
       if (container) createTextRow(container, true);
     }
