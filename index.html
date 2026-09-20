@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Éditeur de calcul — V3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- En-tête Élève -->
+    <div class="student-header">
+      <div class="field"><span class="label">Nom :</span><span class="header-input" contenteditable="true" spellcheck="false"></span></div>
+      <div class="field"><span class="label">Prénom :</span><span class="header-input" contenteditable="true" spellcheck="false"></span></div>
+      <div class="field"><span class="label">Classe :</span><span class="header-input" contenteditable="true" spellcheck="false"></span></div>
+      <div class="field"><span class="label">Date :</span><span class="header-input" contenteditable="true" spellcheck="false"></span></div>
+    </div>
+
+    <!-- Barre d'actions globale -->
+    <div class="toolbar">
+      <button class="btn btn-main" id="addExercise">＋ Ajouter un exercice</button>
+      <button class="btn btn-print" onclick="window.print()">🖨️ Imprimer / PDF</button>
+    </div>
+
+    <!-- Zone contenant les exercices -->
+    <div id="exercises-container"></div>
+
+    <div class="hint">
+      Astuce : La touche [Entrée] crée automatiquement une nouvelle ligne du même type (calcul ou texte).
+    </div>
+
+  </div>
+
+  <!-- Barre d'outils mathématique fixe -->
+  <div class="math-toolbar">
+    <button class="math-button" data-action="square" title="Carré">x²</button>
+    <button class="math-button" data-action="sqrt" title="Racine carrée">√</button>
+    <button class="math-button" data-action="power" title="Puissance">xⁿ</button>
+    <button class="math-button" data-action="fraction" title="Fraction">a/b</button>
+    <button class="math-button" data-insert="≈" title="Environ égal">≈</button>
+    <button class="math-button" data-insert="×" title="Multiplication">×</button>
+    <button class="math-button" data-insert="÷" title="Division">÷</button>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
