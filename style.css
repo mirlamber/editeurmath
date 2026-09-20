@@ -234,9 +234,31 @@ body {
    BOUTON DE SUPPRESSION DE LIGNE
    ====================================================== */
 
-.row, .text-row {
+/* Ligne de texte libre */
+.text-row {
   position: relative;
-  padding-right: 35px; /* Espace pour ne pas chevaucher le texte avec la croix */
+  padding-right: 35px;
+  border-bottom: 1px dashed #eee;
+}
+
+.text-input {
+  font-size: 20px;
+  color: #222;
+  padding: 8px 10px;
+  outline: none;
+  min-height: 38px;
+  line-height: 1.4;
+  width: 100%;
+}
+
+.text-input:empty:before {
+  content: "Phrase de conclusion ou justification...";
+  color: #bbb;
+  font-style: italic;
+}
+
+.text-input:empty:before {
+  display: block; /* Évite un saut de curseur sur certains navigateurs */
 }
 
 .delete-row-btn {
