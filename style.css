@@ -231,36 +231,16 @@ body {
 }
 
 /* ======================================================
-   BOUTON DE SUPPRESSION DE LIGNE
+   GESTION DU BOUTON DE SUPPRESSION (Lignes calcul & texte)
    ====================================================== */
 
-/* Ligne de texte libre */
-.text-row {
+/* Positionnement relatif obligatoire sur TOUTES les lignes */
+.row, .text-row {
   position: relative;
-  padding-right: 35px;
-  border-bottom: 1px dashed #eee;
+  padding-right: 35px; /* Pour éviter que le texte ne passe sous la croix */
 }
 
-.text-input {
-  font-size: 20px;
-  color: #222;
-  padding: 8px 10px;
-  outline: none;
-  min-height: 38px;
-  line-height: 1.4;
-  width: 100%;
-}
-
-.text-input:empty:before {
-  content: "Phrase de conclusion ou justification...";
-  color: #bbb;
-  font-style: italic;
-}
-
-.text-input:empty:before {
-  display: block; /* Évite un saut de curseur sur certains navigateurs */
-}
-
+/* Style de la croix */
 .delete-row-btn {
   position: absolute;
   right: 8px;
@@ -273,12 +253,13 @@ body {
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 4px;
-  opacity: 0.3; /* Discret par défaut */
+  opacity: 0.3;
   transition: all 0.15s ease;
   user-select: none;
+  z-index: 2;
 }
 
-/* La croix s'illumine en rouge clair au survol de la ligne */
+/* Apparition au survol */
 .row:hover .delete-row-btn,
 .text-row:hover .delete-row-btn {
   opacity: 0.8;
