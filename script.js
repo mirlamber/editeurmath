@@ -73,16 +73,22 @@ function createCalculRow(container, focusLeft = false) {
   right.contentEditable = "true";
   right.spellcheck = false;
 
-  // Bouton de suppression de la ligne
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "delete-row-btn";
   deleteBtn.innerHTML = "✕";
   deleteBtn.title = "Supprimer cette ligne";
-  deleteBtn.tabIndex = -1; // Ne stoppe pas la navigation au clavier
+  deleteBtn.tabIndex = -1;
   deleteBtn.addEventListener("click", () => row.remove());
 
   row.append(left, equals, right, deleteBtn);
-  container.appendChild(row);
+
+  // Insère sous la ligne active si elle existe dans le même bloc, sinon à la fin
+  const activeRow = activeEditor ? activeEditor.closest(".row, .text-row") : null;
+  if (activeRow && activeRow.parentElement === container) {
+    activeRow.after(row);
+  } else {
+    container.appendChild(row);
+  }
 
   if (focusLeft) {
     left.focus();
@@ -91,24 +97,18 @@ function createCalculRow(container, focusLeft = false) {
 }
 
 // ======================================================
-// LIGNE DE TEXTE (Phrase / Conclusion)
-// ======================================================
-
-// ======================================================
-// LIGNE DE TEXTE (Phrase / Conclusion) - FIX CURSEUR
+// LIGNE DE TEXTE
 // ======================================================
 
 function createTextRow(container, focus = false) {
   const row = document.createElement("div");
   row.className = "text-row";
 
-  // Zone d'écriture séparée
   const input = document.createElement("div");
   input.className = "text-input";
   input.contentEditable = "true";
   input.spellcheck = false;
 
-  // Bouton de suppression
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "delete-row-btn";
   deleteBtn.innerHTML = "✕";
@@ -117,7 +117,14 @@ function createTextRow(container, focus = false) {
   deleteBtn.addEventListener("click", () => row.remove());
 
   row.append(input, deleteBtn);
-  container.appendChild(row);
+
+  // Insère sous la ligne active si elle existe dans le même bloc, sinon à la fin
+  const activeRow = activeEditor ? activeEditor.closest(".row, .text-row") : null;
+  if (activeRow && activeRow.parentElement === container) {
+    activeRow.after(row);
+  } else {
+    container.appendChild(row);
+  }
 
   if (focus) {
     input.focus();
